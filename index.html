@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VALOR — Veterans Aid for Lifesaving Outcomes &amp; Recovery</title>
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --paper:#F6F8FB;        /* cool paper — institutional calm */
+    --paper-2:#EDF1F6;
+    --ink:#16202E;          /* near-black slate */
+    --ink-2:#4A5568;
+    --ink-3:#7B8694;
+    --line:#E1E7EF;
+    --line-2:#D2DAE4;
+    --navy:#16385C;         /* deep institutional navy — trust */
+    --navy-2:#1F4A77;
+    --navy-sf:#EAF0F6;
+    --gold:#B8852E;         /* restrained gold — verified marks */
+    --gold-sf:#FBF4E4;
+    --green:#2E7D4F;        /* verified / funded green */
+    --green-sf:#EAF4EE;
+    --green-line:#BFE0CC;
+    --maxw:1160px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  /* anchored sections clear the sticky header */
+  #how,#flow,#veterans,#top{scroll-margin-top:88px}
+  body{background:var(--bg);color:var(--ink);font-family:"Inter","Helvetica Neue",Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--navy-sf);color:var(--navy)}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  .btn{padding:13px 24px;border-radius:7px;font-size:14.5px;font-weight:600;transition:.16s;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--navy-2)}
+  .btn-gold{background:var(--gold);color:#fff}
+  .btn-gold:hover{background:#A6741F}
+  .btn-out{background:#fff;border:1.5px solid var(--line-2);color:var(--navy)}
+  .btn-out:hover{border-color:var(--navy);background:var(--paper)}
+  .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:#fff}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .btn-lg{padding:15px 30px;font-size:15.5px}
+  .btn-sm{padding:9px 16px;font-size:13px}
+
+  /* ===== trust ribbon (very top) ===== */
+  .ribbon{background:var(--navy);color:#D7E3EF;font-size:12.5px;padding:8px 20px;display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}
+  .ribbon .ri{display:flex;align-items:center;gap:7px}
+  .ribbon .ri svg{width:14px;height:14px;color:#E8C57A}
+  .ribbon .ri b{color:#fff;font-weight:600}
+
+  /* ===== header ===== */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:26px}
+  .logo{display:flex;align-items:center;gap:11px}
+  .logo .m{width:38px;height:38px;background:var(--navy);border-radius:8px;display:grid;place-items:center;position:relative}
+  .logo .m svg{width:20px;height:20px;color:#E8C57A}
+  .logo .t b{font-size:19px;font-weight:700;letter-spacing:-.02em;color:var(--navy);display:block;line-height:1}
+  .logo .t span{font-size:10px;letter-spacing:.04em;color:var(--ink-3);font-weight:500}
+  .nav .sp{flex:1}
+  .nav a.nl{font-size:14px;font-weight:500;color:var(--ink-2);transition:.15s}
+  .nav a.nl:hover{color:var(--navy)}
+  .burger{display:none;width:42px;height:42px;flex-direction:column;justify-content:center;gap:5px;border:1px solid var(--line-2);border-radius:8px;margin-left:auto}
+  .burger span{width:20px;height:2px;background:var(--ink);margin:0 auto;border-radius:2px}
+
+  /* ===== hero — institutional, evidence-forward ===== */
+  .hero{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--paper))}
+  .hero-in{max-width:var(--maxw);margin:0 auto;padding:64px 24px 56px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.03em;color:var(--navy);background:var(--navy-sf);border:1px solid #D6E2EE;padding:6px 13px;border-radius:20px;margin-bottom:22px}
+  .hero-eyebrow svg{width:14px;height:14px;color:var(--gold)}
+  .hero h1{font-size:clamp(34px,4.4vw,52px);color:var(--ink);margin-bottom:20px;letter-spacing:-.03em}
+  .hero h1 .u{color:var(--navy);position:relative;white-space:nowrap}
+  .hero p.lead{font-size:17px;color:var(--ink-2);max-width:50ch;margin-bottom:28px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+  /* the proof panel — the trust centerpiece */
+  .proof{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(22,32,46,.04),0 12px 36px rgba(22,56,92,.08);overflow:hidden}
+  .proof .ph{background:var(--navy);padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
+  .proof .ph .pt{color:#fff;font-size:13px;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+  .proof .ph .pt svg{width:16px;height:16px;color:#E8C57A}
+  .proof .ph .live{font-size:11px;color:#E8C57A;font-weight:600;display:flex;align-items:center;gap:6px}
+  .proof .ph .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#E8C57A;animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,197,122,.5)}70%{box-shadow:0 0 0 6px rgba(232,197,122,0)}100%{box-shadow:0 0 0 0 rgba(232,197,122,0)}}
+  .proof-stats{display:grid;grid-template-columns:1fr 1fr}
+  .proof-stats .ps{padding:22px;border-bottom:1px solid var(--line)}
+  .proof-stats .ps:nth-child(odd){border-right:1px solid var(--line)}
+  .proof-stats .ps .n{font-size:30px;font-weight:700;letter-spacing:-.03em;color:var(--navy)}
+  .proof-stats .ps .l{font-size:12.5px;color:var(--ink-2);margin-top:4px}
+  .proof-foot{padding:14px 22px;background:var(--paper);display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink-2)}
+  .proof-foot svg{width:15px;height:15px;color:var(--green);flex-shrink:0}
+  .proof-foot b{color:var(--ink);font-weight:600}
+
+  /* ===== verified-by strip ===== */
+  .vby{background:var(--paper);border-bottom:1px solid var(--line)}
+  .vby-in{max-width:var(--maxw);margin:0 auto;padding:22px 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center}
+  .vby .lbl{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .vby .seal{display:flex;align-items:center;gap:9px;color:var(--ink-2);font-size:13.5px;font-weight:500}
+  .vby .seal svg{width:18px;height:18px;color:var(--navy)}
+  .vby .seal b{color:var(--ink);font-weight:600}
+  .vby .illus{font-size:11px;color:var(--ink-3);font-style:italic;width:100%;text-align:center;margin-top:4px}
+
+  /* ===== section base ===== */
+  .section{max-width:var(--maxw);margin:0 auto;padding:74px 24px}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
+  .sec-title{font-size:clamp(26px,3.3vw,36px);color:var(--ink);max-width:22ch;margin-bottom:15px;letter-spacing:-.025em}
+  .sec-intro{font-size:16.5px;color:var(--ink-2);max-width:60ch}
+
+  /* ===== how verification works — the trust engine ===== */
+  .verify{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .verify-in{max-width:var(--maxw);margin:0 auto;padding:74px 24px}
+  .vsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;counter-reset:vs}
+  .vstep{padding:0 26px;position:relative}
+  .vstep:not(:last-child)::after{content:"";position:absolute;right:0;top:14px;width:1px;height:calc(100% - 14px);background:var(--line-2)}
+  .vstep .vn{width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid var(--navy);color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:17px;margin-bottom:18px}
+  .vstep h4{font-size:17px;color:var(--ink);margin-bottom:8px}
+  .vstep p{font-size:14px;color:var(--ink-2);line-height:1.55}
+  .vstep .vchk{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:600;color:var(--green)}
+  .vstep .vchk svg{width:14px;height:14px}
+
+  /* ===== where money goes — transparency block ===== */
+  .flow{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .flow-bars{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;box-shadow:0 1px 2px rgba(22,32,46,.04),0 10px 30px rgba(22,56,92,.06)}
+  .flow-bars .fbh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .flow-bars .fbh .ft{font-size:14px;font-weight:600;color:var(--ink)}
+  .flow-bars .fbh .fa{font-size:24px;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+  .fbar{margin-bottom:18px}
+  .fbar:last-child{margin-bottom:0}
+  .fbar .fbl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .fbar .fbl .fn{font-size:13.5px;color:var(--ink);font-weight:500}
+  .fbar .fbl .fp{font-size:13px;font-weight:700;color:var(--navy)}
+  .fbar .ftrack{height:10px;background:var(--paper-2);border-radius:6px;overflow:hidden}
+  .fbar .ftrack span{display:block;height:100%;border-radius:6px}
+  .fbar.med .ftrack span{background:var(--green)}
+  .fbar.ver .ftrack span{background:var(--navy)}
+  .fbar.ops .ftrack span{background:var(--gold)}
+  .flow-note{font-size:12px;color:var(--ink-3);margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-style:italic}
+
+  .flow-pts{display:flex;flex-direction:column;gap:22px;margin-top:26px}
+  .flow-pt{display:flex;gap:15px}
+  .flow-pt .fic{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+  .flow-pt .fic.g{background:var(--green-sf);color:var(--green)}
+  .flow-pt .fic.n{background:var(--navy-sf);color:var(--navy)}
+  .flow-pt .fic svg{width:20px;height:20px}
+  .flow-pt h4{font-size:16px;color:var(--ink);margin-bottom:4px}
+  .flow-pt p{font-size:14px;color:var(--ink-2);line-height:1.5}
+
+  /* ===== veterans — verified case files ===== */
+  .vets{background:var(--paper);border-top:1px solid var(--line)}
+  .vets-in{max-width:var(--maxw);margin:0 auto;padding:74px 24px}
+  .vfilters{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 32px}
+  .vfilters button{padding:8px 16px;border-radius:7px;font-size:13.5px;font-weight:500;color:var(--ink-2);border:1px solid var(--line-2);background:#fff;transition:.15s}
+  .vfilters button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .vfilters button:hover:not(.on){border-color:var(--navy);color:var(--navy)}
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .vcard{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:.18s;display:flex;flex-direction:column}
+  .vcard:hover{border-color:var(--line-2);box-shadow:0 2px 4px rgba(22,32,46,.04),0 14px 36px rgba(22,56,92,.09);transform:translateY(-3px)}
+  /* case-file header bar */
+  .vcard .vfile{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--paper);border-bottom:1px solid var(--line)}
+  .vcard .vfile .vid{font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+  .vcard .vverified{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--green);background:var(--green-sf);border:1px solid var(--green-line);padding:3px 9px;border-radius:20px}
+  .vcard .vverified svg{width:11px;height:11px}
+  .vcard .vphoto{aspect-ratio:16/10;background:var(--paper-2);position:relative;overflow:hidden}
+  .vcard .vphoto img{width:100%;height:100%;object-fit:cover}
+  .vcard .vbranch{position:absolute;bottom:0;left:0;right:0;padding:18px 16px 10px;background:linear-gradient(180deg,transparent,rgba(22,32,46,.78));color:#fff;font-size:12px;font-weight:600;letter-spacing:.02em}
+  .vcard .vbody{padding:18px;display:flex;flex-direction:column;flex:1}
+  .vcard .vneed{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .vcard h3{font-size:17.5px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+  .vcard .vwho{font-size:13px;color:var(--ink-2);margin-bottom:16px}
+  .vcard .vtrack{height:7px;background:var(--paper-2);border-radius:5px;overflow:hidden;margin-bottom:9px}
+  .vcard .vtrack span{display:block;height:100%;background:var(--navy);border-radius:5px;transition:width .6s}
+  .vcard .vtrack span.done{background:var(--green)}
+  .vcard .vfig{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto}
+  .vcard .vraised{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+  .vcard .vraised .vof{font-size:12.5px;font-weight:400;color:var(--ink-3)}
+  .vcard .vraised.done{color:var(--green)}
+  .vcard .vpct{font-size:12.5px;color:var(--ink-2);font-weight:600}
+
+  /* ===== accountability / trust deep section ===== */
+  .acct{background:var(--navy);color:#fff}
+  .acct-in{max-width:var(--maxw);margin:0 auto;padding:74px 24px}
+  .acct-head{max-width:62ch;margin-bottom:44px}
+  .acct-head .eyebrow{color:#E8C57A}
+  .acct-head h2{font-size:clamp(26px,3.3vw,36px);color:#fff;margin-bottom:14px;letter-spacing:-.02em}
+  .acct-head p{font-size:16.5px;color:#C7D6E5}
+  .acct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .acard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:26px}
+  .acard .aic{width:42px;height:42px;border-radius:9px;background:rgba(232,197,122,.14);display:grid;place-items:center;color:#E8C57A;margin-bottom:16px}
+  .acard .aic svg{width:21px;height:21px}
+  .acard h4{font-size:18px;color:#fff;margin-bottom:9px}
+  .acard p{font-size:14px;color:#B9CADB;line-height:1.55}
+  .acard .atag{display:inline-block;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#E8C57A;background:rgba(232,197,122,.12);padding:4px 11px;border-radius:20px}
+
+  /* ===== final CTA ===== */
+  .final{background:var(--paper);border-top:1px solid var(--line)}
+  .final-in{max-width:760px;margin:0 auto;padding:74px 24px;text-align:center}
+  .final-in h2{font-size:clamp(26px,3.4vw,38px);color:var(--ink);margin-bottom:15px;letter-spacing:-.02em}
+  .final-in p{font-size:17px;color:var(--ink-2);margin-bottom:30px}
+
+  /* ===== footer ===== */
+  footer{background:#fff;border-top:1px solid var(--line)}
+  .foot-in{max-width:var(--maxw);margin:0 auto;padding:48px 24px 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+  .foot-brand .logo{margin-bottom:14px}
+  .foot-brand p{font-size:13.5px;color:var(--ink-2);max-width:34ch;line-height:1.6;margin-bottom:16px}
+  .foot-ein{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;line-height:1.7}
+  .foot-ein b{color:var(--ink-2);font-weight:600}
+  .fcol h5{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  .fcol a{display:block;font-size:14px;color:var(--ink-2);margin-bottom:10px;transition:.15s}
+  .fcol a:hover{color:var(--navy)}
+  .foot-bottom{border-top:1px solid var(--line);padding:18px 24px;max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ink-3)}
+
+  /* ===== modal ===== */
+  .ov{position:fixed;inset:0;background:rgba(16,24,36,.6);backdrop-filter:blur(4px);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:44px 20px;overflow-y:auto}
+  .ov.open{display:flex}
+  .modal{background:#fff;border-radius:14px;width:100%;max-width:560px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+  .mh{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .mh h3{font-size:20px;color:var(--ink)}
+  .mx{font-size:26px;color:var(--ink-3);width:34px;height:34px;border-radius:8px;transition:.15s}
+  .mx:hover{color:var(--ink);background:var(--paper)}
+  .mb{padding:24px;overflow-y:auto}
+  .dfile{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .dfile .vid{font-size:12px;font-weight:600;color:var(--ink-3);letter-spacing:.04em}
+  .dfile .vverified{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:var(--green);background:var(--green-sf);border:1px solid var(--green-line);padding:4px 10px;border-radius:20px}
+  .dfile .vverified svg{width:12px;height:12px}
+  .dphoto{aspect-ratio:16/9;border-radius:10px;overflow:hidden;margin-bottom:18px;background:var(--paper-2)}
+  .dphoto img{width:100%;height:100%;object-fit:cover}
+  .dmeta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:13.5px;color:var(--ink-2)}
+  .dmeta b{color:var(--ink)}
+  .dfig{display:flex;justify-content:space-between;align-items:baseline;margin:16px 0 6px}
+  .dfig .big{font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+  .amts{display:flex;flex-direction:column;gap:9px;margin:8px 0 16px}
+  .amt{display:flex;align-items:center;gap:14px;padding:13px 15px;border:1.5px solid var(--line);border-radius:9px;cursor:pointer;transition:.15s;text-align:left;width:100%}
+  .amt:hover{border-color:var(--navy)}
+  .amt.sel{border-color:var(--navy);background:var(--navy-sf)}
+  .amt .av{font-size:18px;font-weight:700;color:var(--ink);min-width:58px;letter-spacing:-.02em}
+  .amt .ax{font-size:13px;color:var(--ink-2);line-height:1.4}
+  .amt.sel .av{color:var(--navy)}
+  .cust input{width:100%;background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:12px 14px;font-family:inherit;font-size:15px;color:var(--ink);margin-bottom:16px}
+  .cust input:focus{outline:none;border-color:var(--navy)}
+  .deduct{background:var(--green-sf);border:1px solid var(--green-line);border-radius:9px;padding:13px 15px;display:flex;gap:11px;margin:4px 0 16px}
+  .deduct svg{width:18px;height:18px;color:var(--green);flex-shrink:0}
+  .deduct .dt{font-size:12.5px;color:var(--ink-2);line-height:1.45}
+  .deduct .dt b{color:var(--ink)}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-2);margin-bottom:7px}
+  .field input,.field textarea,.field select{width:100%;background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:12px 14px;font-family:inherit;font-size:15px;color:var(--ink)}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--navy)}
+  .field textarea{resize:vertical;min-height:80px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mock{font-size:11.5px;color:var(--gold);font-style:italic;margin-top:8px;text-align:center}
+
+  .astep{display:none}.astep.on{display:block}
+  .srail{display:flex;gap:6px;margin-bottom:22px}
+  .srail .sd{flex:1;height:4px;border-radius:3px;background:var(--line)}
+  .srail .sd.on{background:var(--navy)}
+  .srail .sd.done{background:var(--green)}
+  .vopts{display:flex;flex-direction:column;gap:11px;margin-bottom:8px}
+  .vopt{border:1.5px solid var(--line);border-radius:9px;padding:16px;cursor:pointer;transition:.15s}
+  .vopt:hover{border-color:var(--navy)}
+  .vopt.sel{border-color:var(--navy);background:var(--navy-sf)}
+  .vopt h5{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+  .vopt p{font-size:13px;color:var(--ink-2);line-height:1.45}
+  .formact{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+  .revbox{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:18px;font-size:14px;display:grid;gap:9px;margin-bottom:8px}
+  .revbox .rk{color:var(--ink-3)}.revbox b{color:var(--ink)}
+  .doneb{text-align:center;padding:24px 8px}
+  .doneb .seal{width:70px;height:70px;border-radius:50%;background:var(--green-sf);display:grid;place-items:center;color:var(--green);margin:0 auto 18px}
+  .doneb .seal svg{width:33px;height:33px}
+  .doneb h3{font-size:22px;margin-bottom:9px;color:var(--ink)}
+  .doneb p{font-size:14.5px;color:var(--ink-2);max-width:42ch;margin:0 auto 8px;line-height:1.55}
+
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(160%);background:var(--navy);color:#fff;padding:14px 26px;border-radius:9px;font-size:14.5px;font-weight:500;z-index:200;transition:.4s cubic-bezier(.2,.8,.2,1);opacity:0;pointer-events:none;box-shadow:0 16px 40px rgba(0,0,0,.3);max-width:90vw}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+  .toast.warn{background:var(--gold)}
+
+  @media(max-width:900px){
+    .ribbon{gap:14px;font-size:11.5px}
+    .nav{padding:13px 18px;gap:14px}
+    .nav a.nl{display:none}
+    .burger{display:flex}
+    .hero-in{grid-template-columns:1fr;gap:36px;padding:44px 18px 40px}
+    .vsteps{grid-template-columns:1fr 1fr;gap:32px 0}
+    .vstep{padding:0 20px}
+    .vstep:nth-child(2)::after{display:none}
+    .flow{grid-template-columns:1fr;gap:36px}
+    .vgrid{grid-template-columns:repeat(2,1fr);gap:18px}
+    .acct-grid{grid-template-columns:1fr;gap:18px}
+    .section,.verify-in,.vets-in,.acct-in{padding:52px 18px}
+    .foot-in{grid-template-columns:1fr 1fr;gap:28px}
+    .ov{padding:0}.modal{max-width:none;border-radius:0;min-height:100%}
+    .frow{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .vgrid{grid-template-columns:1fr}
+    .proof-stats{grid-template-columns:1fr}
+    .proof-stats .ps:nth-child(odd){border-right:none}
+    .vsteps{grid-template-columns:1fr}
+    .vstep::after{display:none!important}
+    .foot-in{grid-template-columns:1fr}
+    .hero-cta .btn{flex:1;justify-content:center}
+    .vby-in{gap:16px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+  :focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- TRUST RIBBON -->
+<div class="ribbon">
+  <div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg><b>501(c)(3)</b> nonprofit fund</div>
+  <div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>100% of aid to <b>medical costs</b></div>
+  <div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Every recipient <b>service-verified</b></div>
+</div>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false" aria-label="VALOR home">
+      <span class="m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="t"><b>VALOR</b><span>Veterans Aid · Lifesaving Outcomes &amp; Recovery</span></span>
+    </a>
+    <div class="sp"></div>
+    <a class="nl" href="#" onclick="goHome();return false">Home</a>
+    <a class="nl" href="#how">How verification works</a>
+    <a class="nl" href="#flow">Where money goes</a>
+    <a class="nl" href="#veterans">Veterans</a>
+    <a class="nl" href="#" onclick="openApply();return false">Apply</a>
+    <button class="btn btn-navy btn-sm" onclick="document.querySelector('#veterans').scrollIntoView()">Donate</button>
+    <button class="burger" onclick="document.querySelector('#veterans').scrollIntoView()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-in">
+    <div>
+      <div class="hero-eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>A verified fund for those who served</div>
+      <h1>Help for veterans, with <span class="u">proof at every step.</span></h1>
+      <p class="lead">VALOR is a nonprofit fund that covers veterans' medical costs — and shows you exactly how. Every recipient is service-verified, every dollar is tracked, and your gift is tax-deductible.</p>
+      <div class="hero-cta">
+        <button class="btn btn-navy btn-lg" onclick="document.querySelector('#veterans').scrollIntoView()">Support a veteran</button>
+        <button class="btn btn-out btn-lg" onclick="document.querySelector('#how').scrollIntoView()">See how it works</button>
+      </div>
+    </div>
+    <div class="proof">
+      <div class="ph"><div class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Fund accountability</div><div class="live">LIVE</div></div>
+      <div class="proof-stats">
+        <div class="ps"><div class="n tnum">$<span id="sTotal">0</span></div><div class="l">Disbursed to verified veterans</div></div>
+        <div class="ps"><div class="n tnum" id="sVets">0</div><div class="l">Veterans supported</div></div>
+        <div class="ps"><div class="n tnum">100<span style="font-size:18px">%</span></div><div class="l">Of aid to documented medical costs</div></div>
+        <div class="ps"><div class="n tnum" id="sDays">0</div><div class="l">Avg. days from verified to funded</div></div>
+      </div>
+      <div class="proof-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span><b>EIN 00-0000000</b> · Tax-exempt under IRC §501(c)(3) <span style="color:var(--ink-3)">(illustrative — prototype)</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFIED-BY STRIP -->
+<div class="vby">
+  <div class="vby-in">
+    <span class="lbl">Verification &amp; transparency</span>
+    <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg> Service confirmed via <b>ID.me</b></span>
+    <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg> Or <b>DD-214</b> review</span>
+    <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Funds released for <b>documented costs</b></span>
+    <span class="illus">Trust marks shown are illustrative for this prototype — real accreditations (e.g. Charity Navigator, Candid) would appear here once the fund is registered.</span>
+  </div>
+</div>
+
+<!-- HOW VERIFICATION WORKS -->
+<section class="verify" id="how">
+  <div class="verify-in">
+    <div class="eyebrow">How verification works</div>
+    <h2 class="sec-title">Trust isn't claimed. It's documented.</h2>
+    <p class="sec-intro">Before any campaign opens, a veteran's service is confirmed and their need is reviewed. Here's exactly what happens — and what donors can rely on.</p>
+    <div class="vsteps">
+      <div class="vstep">
+        <div class="vn">1</div>
+        <h4>Service confirmed</h4>
+        <p>The veteran verifies through ID.me (an official VA partner) or submits a DD-214 for review. Their documents stay private — never shown to donors.</p>
+        <span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Identity verified</span>
+      </div>
+      <div class="vstep">
+        <div class="vn">2</div>
+        <h4>Need reviewed</h4>
+        <p>A steward reviews the medical need and an itemized cost estimate before the campaign is published, so every goal maps to real care.</p>
+        <span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Need documented</span>
+      </div>
+      <div class="vstep">
+        <div class="vn">3</div>
+        <h4>You give to the fund</h4>
+        <p>Your tax-deductible gift goes to the VALOR fund — not a personal account. A receipt is issued automatically for your records.</p>
+        <span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Receipt issued</span>
+      </div>
+      <div class="vstep">
+        <div class="vn">4</div>
+        <h4>Care is paid directly</h4>
+        <p>Funds are released only for documented medical costs and tracked to the veteran's recovery — never paid out as untracked cash.</p>
+        <span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Spend tracked</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE MONEY GOES -->
+<section class="section" id="flow">
+  <div class="flow">
+    <div>
+      <div class="eyebrow">Where your money goes</div>
+      <h2 class="sec-title">See every dollar's path.</h2>
+      <p class="sec-intro">A personal fundraiser asks you to trust a stranger. A registered fund shows you the breakdown — and keeps operations lean by design.</p>
+      <div class="flow-pts">
+        <div class="flow-pt"><div class="fic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h4>Aid goes to medical costs only</h4><p>Surgeries, prosthetics, therapy, equipment — disbursed for documented care, not handed out as cash.</p></div></div>
+        <div class="flow-pt"><div class="fic n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h4>Verification keeps it honest</h4><p>A small share funds the identity and need checks that protect every donor and every legitimate veteran.</p></div></div>
+      </div>
+    </div>
+    <div class="flow-bars">
+      <div class="fbh"><div class="ft">For every $100 donated</div><div class="fa">$100</div></div>
+      <div class="fbar med"><div class="fbl"><span class="fn">Veteran medical aid</span><span class="fp">90%</span></div><div class="ftrack"><span style="width:90%"></span></div></div>
+      <div class="fbar ver"><div class="fbl"><span class="fn">Verification &amp; review</span><span class="fp">6%</span></div><div class="ftrack"><span style="width:6%"></span></div></div>
+      <div class="fbar ops"><div class="fbl"><span class="fn">Operations &amp; processing</span><span class="fp">4%</span></div><div class="ftrack"><span style="width:4%"></span></div></div>
+      <div class="flow-note">Illustrative allocation for this prototype. A registered fund would publish audited figures here and in its annual report.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VETERANS -->
+<section class="vets" id="veterans">
+  <div class="vets-in">
+    <div class="eyebrow">Verified veterans seeking aid</div>
+    <h2 class="sec-title" style="margin-bottom:0">Every case, confirmed before it opens.</h2>
+    <div class="vfilters" id="filters">
+      <button class="on" data-f="all">All cases</button>
+      <button data-f="Surgery">Surgery</button>
+      <button data-f="Prosthetics">Prosthetics</button>
+      <button data-f="Mental Health">Mental health</button>
+      <button data-f="Rehab">Rehab</button>
+      <button data-f="Equipment">Equipment</button>
+    </div>
+    <div class="vgrid" id="vgrid"></div>
+  </div>
+</section>
+
+<!-- ACCOUNTABILITY -->
+<section class="acct">
+  <div class="acct-in">
+    <div class="acct-head">
+      <div class="eyebrow">Why give through the fund</div>
+      <h2>Three guarantees a personal fundraiser can't make.</h2>
+      <p>This is the difference between sending money to a stranger and giving through a registered nonprofit built for accountability.</p>
+    </div>
+    <div class="acct-grid">
+      <div class="acard">
+        <div class="aic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Your gift is tax-deductible</h4>
+        <p>Because VALOR is a registered 501(c)(3), donations are deductible to the extent allowed by law — with an automatic receipt. Money sent directly to an individual is not.</p>
+        <span class="atag">Receipt on every gift</span>
+      </div>
+      <div class="acard">
+        <div class="aic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>The veteran keeps every dollar</h4>
+        <p>Charitable medical aid is disbursed for documented costs and is generally not taxable income to the recipient — so help isn't eroded by a tax bill.</p>
+        <span class="atag">Medical-only disbursement</span>
+      </div>
+      <div class="acard">
+        <div class="aic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>Every recipient is verified</h4>
+        <p>Service is confirmed through ID.me or DD-214 review before a campaign opens. You always know your gift reaches someone who actually served.</p>
+        <span class="atag">Confirmed before opening</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="final-in">
+    <div class="eyebrow" style="text-align:center">Stand with them</div>
+    <h2>The mission didn't end at discharge.</h2>
+    <p>Neither does ours. Support a verified veteran facing the fight of their life — with the confidence that your gift is tracked from donor to recovery.</p>
+    <button class="btn btn-navy btn-lg" onclick="document.querySelector('#veterans').scrollIntoView()">Support a veteran today</button>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-brand">
+      <a class="logo" href="#" onclick="goHome();return false" aria-label="VALOR home">
+        <span class="m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="t"><b>VALOR</b><span>Veterans Aid · Lifesaving Outcomes &amp; Recovery</span></span>
+      </a>
+      <p>A nonprofit fund covering medical costs for those who served — with verification and transparency at every step.</p>
+      <div class="foot-ein"><b>EIN</b> 00-0000000 · 501(c)(3) status illustrative (prototype)<br>Verification via ID.me · Payments via a nonprofit processor (planned)</div>
+    </div>
+    <div class="fcol"><h5>Give</h5><a href="#veterans">Support a veteran</a><a href="#flow">Where money goes</a><a href="#" onclick="openTax();return false">Tax &amp; deductibility</a></div>
+    <div class="fcol"><h5>Veterans</h5><a href="#" onclick="openApply();return false">Apply for aid</a><a href="#how">How verification works</a></div>
+    <div class="fcol"><h5>Trust</h5><a href="#how">Our process</a><a href="#" onclick="toast('Annual report would appear here once registered.');return false">Annual report</a><a href="#" onclick="toast('Steward dashboard is in the full prototype.');return false">For stewards</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 VALOR (prototype). Not yet a registered charity.</span><span>Informational only — not tax or legal advice.</span></div>
+</footer>
+
+<!-- DETAIL MODAL -->
+<div class="ov" id="ovDetail"><div class="modal">
+  <div class="mh"><h3 id="dtTitle"></h3><button class="mx" onclick="closeAll()">×</button></div>
+  <div class="mb" id="dtBody"></div>
+</div></div>
+
+<!-- DONATE MODAL -->
+<div class="ov" id="ovDonate"><div class="modal">
+  <div class="mh"><h3>Make a tax-deductible gift</h3><button class="mx" onclick="closeAll()">×</button></div>
+  <div class="mb">
+    <div id="dCtx" style="font-size:14px;color:var(--ink-2);margin-bottom:18px"></div>
+    <label style="display:block;font-size:12.5px;font-weight:600;color:var(--ink-2);margin-bottom:10px">Choose your impact</label>
+    <div class="amts" id="amts"></div>
+    <div class="cust"><input id="cAmt" type="number" placeholder="Other amount" min="1"></div>
+    <div class="field"><label>Your name (for receipt)</label><input id="dName" placeholder="e.g. M. Reyes"></div>
+    <div class="deduct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div class="dt"><b>Tax-deductible.</b> An itemized IRS receipt is emailed immediately after your gift.</div></div>
+    <button class="btn btn-navy" style="width:100%;justify-content:center" onclick="submitDon()">Give securely</button>
+    <div class="mock">◆ Simulated — production uses a nonprofit-grade payment processor.</div>
+  </div>
+</div></div>
+
+<!-- TAX MODAL -->
+<div class="ov" id="ovTax"><div class="modal">
+  <div class="mh"><h3>Tax &amp; transparency</h3><button class="mx" onclick="closeAll()">×</button></div>
+  <div class="mb">
+    <div class="deduct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg><div class="dt"><b>Why a registered fund?</b> A 501(c)(3) can receive tax-deductible gifts, hold them accountably, and disburse for documented medical costs — three things a personal fundraiser generally cannot.</div></div>
+    <p style="font-size:14px;color:var(--ink-2);margin:14px 0;line-height:1.6">For <b style="color:var(--ink)">donors</b>: gifts are deductible to the extent allowed by law, with an automatic itemized receipt. For <b style="color:var(--ink)">veterans</b>: charitable medical aid is disbursed for documented costs and is generally not taxable income.</p>
+    <p style="font-size:14px;color:var(--ink-2);line-height:1.6">Every recipient is <b style="color:var(--ink)">service-verified</b> via ID.me or DD-214 review, and spending is tracked to documented care.</p>
+    <div class="mock" style="text-align:left;margin-top:14px">◆ Prototype — EIN and 501(c)(3) status illustrative, not yet filed. Informational, not tax or legal advice.</div>
+  </div>
+</div></div>
+
+<!-- APPLY MODAL -->
+<div class="ov" id="ovApply"><div class="modal">
+  <div class="mh"><h3>Apply for support</h3><button class="mx" onclick="closeAll()">×</button></div>
+  <div class="mb">
+    <div class="srail"><div class="sd on" data-d="1"></div><div class="sd" data-d="2"></div><div class="sd" data-d="3"></div><div class="sd" data-d="4"></div></div>
+    <div class="astep on" data-p="1">
+      <h3 style="font-size:20px;margin-bottom:6px">Verify your service</h3>
+      <p style="font-size:14px;color:var(--ink-2);margin-bottom:18px">VALOR is for veterans only. Choose how to confirm — your documents are never shown to donors.</p>
+      <div class="vopts">
+        <div class="vopt sel" data-v="idme" onclick="pickV(this,'idme')"><h5>Instant — ID.me</h5><p>Confirm through ID.me, an official VA partner. About two minutes; records stay private.</p></div>
+        <div class="vopt" data-v="manual" onclick="pickV(this,'manual')"><h5>Manual — DD-214</h5><p>Upload discharge papers for a steward to review within 1–2 business days.</p></div>
+      </div>
+      <div class="mock" style="text-align:left">◆ Simulated — production connects to ID.me; manual routes to a steward.</div>
+      <div class="formact"><span></span><button class="btn btn-navy" onclick="aStep(2)">Verify &amp; continue</button></div>
+    </div>
+    <div class="astep" data-p="2">
+      <h3 style="font-size:20px;margin-bottom:6px">Tell your story</h3>
+      <p style="font-size:14px;color:var(--ink-2);margin-bottom:18px">Donors give to people, not line items.</p>
+      <div class="field"><label>Campaign title</label><input id="aTitle" placeholder="e.g. Help SSG Reyes recover from spinal surgery"></div>
+      <div class="frow">
+        <div class="field"><label>Name &amp; rank</label><input id="aWho" placeholder="e.g. SSG Marcus Reyes, U.S. Army (Ret.)"></div>
+        <div class="field"><label>Branch</label><select id="aBranch"><option>Army</option><option>Navy</option><option>Air Force</option><option>Marine Corps</option><option>Coast Guard</option><option>Space Force</option></select></div>
+      </div>
+      <div class="field"><label>Your story</label><textarea id="aDesc" placeholder="What happened, where you are in treatment, what recovery looks like."></textarea></div>
+      <div class="formact"><button class="btn btn-out" onclick="aStep(1)">Back</button><button class="btn btn-navy" onclick="vStory()">Continue</button></div>
+    </div>
+    <div class="astep" data-p="3">
+      <h3 style="font-size:20px;margin-bottom:6px">Medical need &amp; goal</h3>
+      <p style="font-size:14px;color:var(--ink-2);margin-bottom:18px">Funds are disbursed only for documented medical costs.</p>
+      <div class="frow">
+        <div class="field"><label>Type of need</label><select id="aCat"><option>Surgery</option><option>Prosthetics</option><option>Mental Health</option><option>Rehab</option><option>Equipment</option></select></div>
+        <div class="field"><label>Goal (USD)</label><input id="aGoal" type="number" placeholder="20000" min="100"></div>
+      </div>
+      <div class="field"><label>What the funds cover</label><textarea id="aCover" placeholder="e.g. Surgical center fee, anesthesia, 6 weeks therapy."></textarea></div>
+      <div class="formact"><button class="btn btn-out" onclick="aStep(2)">Back</button><button class="btn btn-navy" onclick="vNeed()">Continue</button></div>
+    </div>
+    <div class="astep" data-p="4">
+      <h3 style="font-size:20px;margin-bottom:6px">Review &amp; submit</h3>
+      <p style="font-size:14px;color:var(--ink-2);margin-bottom:18px">Confirm everything's right.</p>
+      <div class="revbox" id="revBox"></div>
+      <div class="mock" style="text-align:left">◆ On submit, your verified case joins the list above.</div>
+      <div class="formact"><button class="btn btn-out" onclick="aStep(3)">Back</button><button class="btn btn-gold" onclick="submitApp()">Submit application</button></div>
+    </div>
+    <div class="astep" data-p="done">
+      <div class="doneb">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Service verified — application received</h3>
+        <p>Once a steward confirms your need, your case joins the verified list and donors can support you.</p>
+        <button class="btn btn-navy" style="margin-top:16px" onclick="closeAll();document.querySelector('#veterans').scrollIntoView()">See verified cases</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const PH={
+  Surgery:"https://images.unsplash.com/photo-1612531385446-f7e6d131e1d0?w=700&q=75",
+  Prosthetics:"https://images.unsplash.com/photo-1559757175-5700dde675bc?w=700&q=75",
+  "Mental Health":"https://images.unsplash.com/photo-1493836512294-502baa1986e2?w=700&q=75",
+  Rehab:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=75",
+  Equipment:"https://images.unsplash.com/photo-1597764690523-15bea4c581c9?w=700&q=75"
+};
+const FACE={
+  1:"https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=700&q=75",
+  2:"https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=75",
+  3:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=75",
+  4:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=700&q=75",
+  5:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&q=75",
+  6:"https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=700&q=75"
+};
+const CTX={
+  Surgery:[[25,"Pre-op lab panel"],[75,"A surgical consult"],[150,"One night of post-op care"],[300,"A full anesthesia block"]],
+  Prosthetics:[[25,"Socket fitting supplies"],[75,"An hour of prosthetist time"],[150,"A gait-training session"],[300,"Components toward a blade"]],
+  "Mental Health":[[25,"A peer-support session"],[75,"One therapy hour"],[150,"A week of group treatment"],[300,"Intake + first sessions"]],
+  Rehab:[[25,"Therapy supplies"],[75,"One physical-therapy hour"],[150,"A week of outpatient rehab"],[300,"A month of sessions"]],
+  Equipment:[[25,"Safety fittings"],[75,"A seating &amp; cushion kit"],[150,"Wheelchair servicing"],[300,"Toward a power chair"]]
+};
+let camps=[
+  {id:1,title:"Recover from spinal surgery",who:"SSG Marcus Reyes, U.S. Army (Ret.)",branch:"U.S. Army",cat:"Surgery",goal:28000,raised:19400,donors:214,status:"live",verify:"idme",desc:"After a service-connected injury, Marcus needs a second spinal fusion the VA backlog won't cover in time. Funds go to the surgical center and post-op care."},
+  {id:2,title:"A new running blade",who:"Cpl. Lily Tran, USMC (Ret.)",branch:"U.S. Marine Corps",cat:"Prosthetics",goal:15000,raised:11250,donors:168,status:"live",verify:"idme",desc:"Lily lost her leg below the knee in 2021. A running-specific blade would let her coach youth track again."},
+  {id:3,title:"Inpatient PTSD treatment",who:"PO1 James Okafor, U.S. Navy (Ret.)",branch:"U.S. Navy",cat:"Mental Health",goal:18000,raised:6300,donors:97,status:"live",verify:"manual",desc:"James needs an 8-week residential PTSD program not covered by his plan. Every dollar shortens the wait to care."},
+  {id:4,title:"Six months of intensive rehab",who:"Sgt. Erin Daniels, U.S. Air Force (Ret.)",branch:"U.S. Air Force",cat:"Rehab",goal:12000,raised:9800,donors:141,status:"live",verify:"idme",desc:"Intensive physical rehab after a training accident. Funds cover therapy and travel to the regional center."},
+  {id:5,title:"A power wheelchair",who:"BM2 Hector Alvarez, USCG (Ret.)",branch:"U.S. Coast Guard",cat:"Equipment",goal:9500,raised:9500,donors:203,status:"live",verify:"manual",desc:"Hector's ALS progression means he needs a powered chair now. Fully funded — thank you to all who answered."}
+];
+let nextId=6, filt="all", donT=null, selAmt=75, ap={v:"idme",s:1};
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const money=n=>n.toLocaleString("en-US");
+function chk(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>';}
+
+function liveC(){return camps.filter(c=>c.status==="live");}
+function renderVets(){
+  const g=$("#vgrid");g.innerHTML="";
+  const list=liveC().filter(c=>filt==="all"||c.cat===filt);
+  if(!list.length){g.innerHTML='<div style="grid-column:1/-1;padding:48px 0;text-align:center;color:var(--ink-3)">No cases in this category right now.</div>';}
+  list.forEach(c=>{
+    const pct=Math.min(100,Math.round(c.raised/c.goal*100)),met=c.raised>=c.goal;
+    const vl=c.verify==="idme"?"ID.me":"DD-214";
+    const el=document.createElement("div");el.className="vcard";el.onclick=()=>openDetail(c.id);
+    el.innerHTML=`
+      <div class="vfile"><span class="vid">CASE #${String(c.id).padStart(4,'0')}</span><span class="vverified">${chk()} ${vl} verified</span></div>
+      <div class="vphoto"><img src="${FACE[c.id]||PH[c.cat]}" alt="${c.who}"><div class="vbranch">${c.branch}</div></div>
+      <div class="vbody">
+        <div class="vneed">${c.cat}${met?' · Goal met':''}</div>
+        <h3>${c.title}</h3>
+        <div class="vwho">${c.who}</div>
+        <div class="vtrack"><span class="${met?'done':''}" style="width:${pct}%"></span></div>
+        <div class="vfig"><div class="vraised ${met?'done':''}">$${money(c.raised)} <span class="vof">of $${money(c.goal)}</span></div><div class="vpct">${pct}%</div></div>
+      </div>`;
+    g.appendChild(el);
+  });
+  stats();
+}
+function stats(){
+  const live=liveC();
+  animate($("#sTotal"),live.reduce((s,c)=>s+c.raised,0),true);
+  animate($("#sVets"),live.length,false);
+  animate($("#sDays"),11,false);
+}
+function animate(node,target,comma){
+  if(!node)return;
+  let cur=parseInt((node.textContent||"0").replace(/,/g,""))||0;
+  if(cur===target){node.textContent=comma?money(cur):cur;return;}
+  const step=Math.max(1,Math.round((target-cur)/18));
+  const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t);}node.textContent=comma?money(cur):cur;},22);
+}
+$("#filters").addEventListener("click",e=>{
+  if(e.target.tagName!=="BUTTON")return;
+  $$("#filters button").forEach(b=>b.classList.remove("on"));
+  e.target.classList.add("on");filt=e.target.dataset.f;renderVets();
+});
+
+function openDetail(id){
+  const c=camps.find(x=>x.id===id);if(!c)return;
+  const pct=Math.min(100,Math.round(c.raised/c.goal*100)),met=c.raised>=c.goal;
+  const vl=c.verify==="idme"?"ID.me verified":"DD-214 verified";
+  $("#dtTitle").textContent=c.title;
+  $("#dtBody").innerHTML=`
+    <div class="dfile"><span class="vid">CASE #${String(c.id).padStart(4,'0')}</span><span class="vverified">${chk()} ${vl}</span></div>
+    <div class="dphoto"><img src="${FACE[c.id]||PH[c.cat]}" alt=""></div>
+    <div class="dmeta"><span><b>${c.who}</b></span><span>${c.branch}</span><span>${c.cat}</span></div>
+    <p style="font-size:14.5px;color:var(--ink-2);line-height:1.6">${c.desc}</p>
+    <div class="vtrack" style="margin-top:18px;height:9px;background:var(--paper-2);border-radius:5px;overflow:hidden"><span style="display:block;height:100%;width:${pct}%;background:${met?'var(--green)':'var(--navy)'};border-radius:5px"></span></div>
+    <div class="dfig"><div class="big" style="${met?'color:var(--green)':''}">$${money(c.raised)}</div><div style="font-size:14px;color:var(--ink-2)">of $${money(c.goal)} · ${pct}%</div></div>
+    <div class="deduct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div class="dt"><b>Tax-deductible.</b> Your gift goes to the VALOR fund and is disbursed to ${c.who.split(',')[0]} for documented medical costs.</div></div>
+    <button class="btn btn-navy" style="width:100%;justify-content:center" onclick="openDonate(${c.id})">Support this veteran</button>`;
+  show("#ovDetail");
+}
+function openDonate(id){
+  donT=camps.find(x=>x.id===id);if(!donT)return;
+  $("#dCtx").innerHTML=`Supporting <b style="color:var(--ink)">${donT.title}</b> — ${donT.who}`;
+  const ctx=CTX[donT.cat]||CTX.Surgery;selAmt=ctx[1][0];
+  $("#amts").innerHTML=ctx.map((a,i)=>`<button class="amt ${i===1?'sel':''}" data-a="${a[0]}" onclick="pickAmt(this,${a[0]})"><span class="av">$${a[0]}</span><span class="ax">${a[1]}</span></button>`).join("");
+  $("#cAmt").value="";$("#dName").value="";
+  show("#ovDonate");
+}
+function pickAmt(el,a){$$("#amts .amt").forEach(b=>b.classList.remove("sel"));el.classList.add("sel");selAmt=a;$("#cAmt").value="";}
+$("#cAmt").addEventListener("input",e=>{if(e.target.value){$$("#amts .amt").forEach(b=>b.classList.remove("sel"));selAmt=parseInt(e.target.value)||0;}});
+function submitDon(){
+  const a=parseInt($("#cAmt").value)||selAmt;
+  if(!a||a<1){toast("Enter a gift amount.",1);return;}
+  donT.raised+=a;donT.donors+=1;closeAll();renderVets();
+  toast(`Thank you — $${money(a)} gift recorded (simulated). Receipt emailed.`);
+}
+
+function openApply(){closeAll();ap={v:"idme",s:1};aStep(1);["aTitle","aWho","aDesc","aGoal","aCover"].forEach(i=>{if($("#"+i))$("#"+i).value="";});show("#ovApply");}
+function pickV(el,v){$$(".vopt").forEach(o=>o.classList.remove("sel"));el.classList.add("sel");ap.v=v;}
+function aStep(n){
+  ap.s=n;
+  $$(".astep").forEach(p=>p.classList.remove("on"));
+  $(`.astep[data-p="${n}"]`).classList.add("on");
+  $$(".srail .sd").forEach(d=>{const dn=parseInt(d.dataset.d);if(!dn)return;d.classList.toggle("on",dn===(n==="done"?5:n));d.classList.toggle("done",dn<(n==="done"?5:n));});
+}
+function vStory(){if(!$("#aTitle").value.trim()||!$("#aWho").value.trim()){toast("Add a title and your name.",1);return;}aStep(3);}
+function vNeed(){const g=parseInt($("#aGoal").value);if(!g||g<100){toast("Set a goal of at least $100.",1);return;}
+  const vl=ap.v==="idme"?"ID.me (instant)":"DD-214 manual review";
+  $("#revBox").innerHTML=`<div><span class="rk">Verification:</span> <b>${vl}</b></div><div><span class="rk">Title:</span> <b>${$("#aTitle").value||"—"}</b></div><div><span class="rk">Veteran:</span> <b>${$("#aWho").value||"—"}</b> · ${$("#aBranch").value}</div><div><span class="rk">Need:</span> <b>${$("#aCat").value}</b> · goal $${money(parseInt($("#aGoal").value)||0)}</div><div><span class="rk">Covers:</span> ${$("#aCover").value||"—"}</div>`;
+  aStep(4);
+}
+function submitApp(){
+  camps.unshift({id:nextId++,title:$("#aTitle").value.trim(),who:$("#aWho").value.trim(),branch:$("#aBranch").value,cat:$("#aCat").value,goal:parseInt($("#aGoal").value),raised:0,donors:0,status:"live",verify:ap.v,desc:$("#aDesc").value.trim()||$("#aCover").value.trim()||"Newly submitted."});
+  aStep("done");renderVets();
+  toast("Service verified — your case is live.");
+}
+
+function openTax(){show("#ovTax");}
+function goHome(){closeAll();window.scrollTo({top:0,behavior:"smooth"});}
+function show(s){closeAll();$(s).classList.add("open");document.body.style.overflow="hidden";}
+function closeAll(){$$(".ov").forEach(o=>o.classList.remove("open"));document.body.style.overflow="";}
+$$(".ov").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)closeAll();}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll();});
+let tT;function toast(m,w){const t=$("#toast");t.innerHTML=m;t.classList.toggle("warn",!!w);t.classList.add("show");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("show"),3400);}
+
+renderVets();
+</script>
+</body>
+</html>
