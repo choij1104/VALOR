@@ -379,7 +379,6 @@
     <div class="spacer"></div>
     <div class="nav-links">
       <a href="#how" onclick="navTo('#how');return false">How it works</a>
-      <a href="#model" onclick="navTo('#model');return false">The model</a>
       <a href="#veterans" onclick="navTo('#veterans');return false">Veterans</a>
       <a href="#team" onclick="navTo('#team');return false">Our team</a>
       <a href="#accountability" onclick="navTo('#accountability');return false">Accountability</a>
@@ -434,32 +433,6 @@
       <div class="step"><div class="num">02</div><h4>Need reviewed</h4><p>Itemized cost estimate checked before publishing.</p></div>
       <div class="step"><div class="num">03</div><h4>Gift to the fund</h4><p>Tax-deductible, receipt issued automatically.</p></div>
       <div class="step"><div class="num">04</div><h4>Care paid directly</h4><p>Released only for documented costs, fully tracked.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== THE MODEL ===================== -->
-<section class="model" id="model">
-  <div class="wrap sec">
-    <div class="kicker">The model</div>
-    <h2>Two entities, cleanly separated.</h2>
-    <p class="lead">A charitable arm holds donor trust; a technology arm builds and licenses the platform — connected by an arm's-length contract, never by donor funds.</p>
-    <div class="model-grid">
-      <div class="entity">
-        <div class="t np">NONPROFIT · 501(c)(3)</div>
-        <h3>VALOR Foundation</h3>
-        <p>Receives tax-deductible donations, verifies veterans, disburses medical aid, owns the brand and public trust.</p>
-      </div>
-      <div class="link">
-        <span class="cap">ARM'S-LENGTH</span>
-        <span class="arrow"></span>
-        <span class="cap">SERVICES CONTRACT</span>
-      </div>
-      <div class="entity">
-        <div class="t fp">FOR-PROFIT · LLC</div>
-        <h3>VALOR Tech LLC</h3>
-        <p>Builds the software and verification system; licenses the platform to other veteran and community organizations.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -960,7 +933,7 @@ const BOT_QA = [
   { q:"How are veterans verified?", a:"Every recipient confirms military service through ID.me (an official VA partner) or a DD-214 review before a campaign opens. Their documents stay private — never shown to donors." },
   { q:"Where does my money go?", a:"For every $100: about $90 goes to veteran medical aid, $6 to verification &amp; review, and $4 to operations. Funds are released only for documented medical costs and tracked to recovery." },
   { q:"Can a veteran keep the money?", a:"Charitable medical aid is disbursed for documented costs and is generally not taxable income to the veteran — so help isn't eroded by a tax bill. Funds go to care, not untracked cash." },
-  { q:"How is VALOR sustainable?", a:"A nonprofit foundation holds donor trust; a separate technology company (VALOR Tech LLC) builds and licenses the platform to other organizations. They're connected by an arm's-length contract — donor gifts never become founder income." },
+  { q:"How is VALOR sustainable?", a:"VALOR keeps operations lean — about 90¢ of every dollar goes directly to veteran medical aid, with the rest covering verification and basic operations. Every allocation is tracked and reported, so the fund stays accountable as it grows." },
 ];
 const BOT_INTRO = "Hi — I'm the VALOR assistant. Ask me about how the fund works, verification, or tax-deductibility. (Demo assistant with prepared answers.)";
 function onChatbot(){
